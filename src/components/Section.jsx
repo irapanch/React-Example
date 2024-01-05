@@ -5,9 +5,9 @@ export const Section = ({ title = "Default", data = [] }) => {
     <section>
       <h1>{title}</h1>
       <ul>
-        <li>{data[0]?.title}</li>
-        <li>{data[1]?.title}</li>
-        <li>3</li>
+        {data.map((item) => (
+          <li key={item.id}>{item.title}</li>
+        ))}
       </ul>
     </section>
   );
