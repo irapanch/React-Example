@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export const Section = ({ title = "Default", data = [] }) => {
   return (
@@ -11,4 +12,13 @@ export const Section = ({ title = "Default", data = [] }) => {
       </ul>
     </section>
   );
+};
+Section.propTypes = {
+  title: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+    })
+  ),
 };

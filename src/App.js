@@ -21,8 +21,8 @@ function App() {
       {/* <Button titleBtn="Login" />
       <Button titleBtn="Password" />
       <Button titleBtn="add" /> */}
-      <Section data={movies} />
-      <Section data={movies} />
+      <Section title="Movie1" data={movies} />
+      <Section title="Movie2" data={movies} />
       <hr></hr>
       {btns.map((btn) => (
         <Button key={btn} titleBtn={btn}>
