@@ -15,13 +15,16 @@ function App() {
       <h1>{!isOnline ? "Hello my friend" : "Let`s login"}</h1>
       <h2>{isOnline && "Online"}</h2>
       {!isOnline && <h2>Offline</h2>}
-      <Button titleBtn="Login" />
+      {/* <Button titleBtn="Login" />
       <Button titleBtn="Password" />
-      <Button titleBtn="add" />
+      <Button titleBtn="add" /> */}
       <Section data={movies} />
       <Section data={movies} />
       {btns.map((btn) => (
-        <Button key={btn} titleBtn={btn} />
+        <Button key={btn} titleBtn={btn}>
+          {" "}
+          Hello
+        </Button>
       ))}
     </div>
   );

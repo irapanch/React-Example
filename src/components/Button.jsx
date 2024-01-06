@@ -1,5 +1,5 @@
 import React from "react";
 
-export const Button = ({ titleBtn = "Button" }) => {
-  return <button type="button">{titleBtn}</button>;
+export const Button = (props) => {
+  return <button type="button">{props.children}</button>;
 };
