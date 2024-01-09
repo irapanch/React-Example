@@ -1,6 +1,6 @@
-import { Button } from "./components/Button";
+import { Button } from "./components/Button/Button";
 import { Modal } from "./components/Modal/Modal";
-import { Section } from "./components/Section";
+import { Section } from "./components/Section/Section";
 
 function App() {
   const movies = [
@@ -9,31 +9,31 @@ function App() {
     { id: 3, title: "Flexi" },
     { id: 4, title: "Route" },
   ];
-  const btns = ["get", "push", "patch", "delete"];
+  // const btns = ["get", "push", "patch", "delete"];
   const isOnline = false;
   return (
     <div className="App">
-      <h1>{!isOnline ? "Hello my friend" : "Let`s login"}</h1>
+      <h1 className="title">{!isOnline ? "Hello my friend" : "Let`s login"}</h1>
       <hr></hr>
       <h2>{isOnline && "Online"}</h2>
       {!isOnline && <h2>Offline</h2>}
       <hr></hr>
-      {/* <Button titleBtn="Login" />
+      <Button titleBtn="Login" />
       <Button titleBtn="Password" />
-      <Button titleBtn="add" /> */}
+      <Button titleBtn="add" />
       <Section title="Movie1" data={movies} />
       <Section title="Movie2" data={movies} />
       <hr></hr>
-      {btns.map((btn) => (
+      {/* {btns.map((btn) => (
         <Button key={btn} titleBtn={btn}>
           {" "}
           Hello
         </Button>
-      ))}
+      ))} */}
       <hr></hr>
       <Modal>
         <Button>Hello from Modal</Button>
-        <h1>React </h1>
+        <h1 className="title">React </h1>
       </Modal>
       <Modal>
         em Eligendi minima consequatur laboriosam odit quibusdam, esse magnam

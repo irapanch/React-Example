@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { StyledBtn } from "./Button.styled";
 
 export const Button = (props) => {
-  return <button type="button">{props.children}</button>;
+  return <StyledBtn type="button">{props.titleBtn}</StyledBtn>;
 };
 
 Button.propTypes = {

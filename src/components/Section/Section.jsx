@@ -1,15 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { StyledItem, StyledList } from "./Section.styled";
 
 export const Section = ({ title = "Default", data = [] }) => {
   return (
     <section>
       <h1>{title}</h1>
-      <ul>
+      <StyledList>
         {data.map((item) => (
-          <li key={item.id}>{item.title}</li>
+          <StyledItem key={item.id}>{item.title}</StyledItem>
         ))}
-      </ul>
+      </StyledList>
     </section>
   );
 };
