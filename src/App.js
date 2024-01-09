@@ -1,6 +1,7 @@
 import { Button } from "./components/Button/Button";
 import { Modal } from "./components/Modal/Modal";
 import { Section } from "./components/Section/Section";
+import { Flex } from "./styles/GlobalStyles";
 
 function App() {
   const movies = [
@@ -18,11 +19,22 @@ function App() {
       <h2>{isOnline && "Online"}</h2>
       {!isOnline && <h2>Offline</h2>}
       <hr></hr>
-      <Button titleBtn="Login" />
-      <Button titleBtn="Password" />
-      <Button titleBtn="add" />
+      <Flex
+        $direction="column"
+        $justify="center"
+        $align="center"
+        $minHeight="50vh"
+        $gap="20px"
+      >
+        <div>
+          <Button titleBtn="Login" />
+          <Button titleBtn="Password" />
+          <Button titleBtn="add" />
+        </div>
+      </Flex>
       <Section title="Movie1" data={movies} />
       <Section title="Movie2" data={movies} />
+
       <hr></hr>
       {/* {btns.map((btn) => (
         <Button key={btn} titleBtn={btn}>

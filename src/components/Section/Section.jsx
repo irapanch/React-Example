@@ -1,15 +1,25 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { StyledItem, StyledList } from "./Section.styled";
+import { Flex } from "../../styles/GlobalStyles";
 
 export const Section = ({ title = "Default", data = [] }) => {
   return (
     <section>
       <h1>{title}</h1>
+
       <StyledList>
-        {data.map((item) => (
-          <StyledItem key={item.id}>{item.title}</StyledItem>
-        ))}
+        <Flex
+          $direction="column"
+          $justify="center"
+          $align="center"
+          $minHeight="50vh"
+          $gap="20px"
+        >
+          {data.map((item) => (
+            <StyledItem key={item.id}>{item.title}</StyledItem>
+          ))}
+        </Flex>
       </StyledList>
     </section>
   );
