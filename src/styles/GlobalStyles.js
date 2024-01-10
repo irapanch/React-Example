@@ -4,7 +4,12 @@ export const GlobalSyles = createGlobalStyle`
 body{
   @import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
   font-family: 'Coming Soon', cursive;
-  
+  // local fonts
+  /* @font-face {
+    font-family: ;
+    src: url( path to fonts);
+  } */
+
     background-color: ${({ theme }) => theme.colors.bgMain};
     .title{
         color: darkblue;
