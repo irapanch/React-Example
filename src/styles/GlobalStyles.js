@@ -2,6 +2,9 @@ import { createGlobalStyle, styled } from "styled-components";
 
 export const GlobalSyles = createGlobalStyle`
 body{
+  @import url('https://fonts.googleapis.com/css2?family=Coming+Soon&display=swap');
+  font-family: 'Coming Soon', cursive;
+  
     background-color: ${({ theme }) => theme.colors.bgMain};
     .title{
         color: darkblue;
