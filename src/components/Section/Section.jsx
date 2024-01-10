@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { StyledItem, StyledList } from "./Section.styled";
+import { StyledItem, StyledList, Title } from "./Section.styled";
 import { Flex } from "../../styles/GlobalStyles";
 
 export const Section = ({ title = "Default", data = [] }) => {
   return (
     <section>
-      <h1>{title}</h1>
+      <Title>{title}</Title>
 
       <StyledList>
         <Flex
