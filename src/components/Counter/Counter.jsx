@@ -9,7 +9,7 @@ import {
 export class Counter extends React.Component {
   state = {
     counter: 21,
-    step: 1,
+    step: 2,
     loading: false,
   };
   increment = () => {
@@ -17,24 +17,32 @@ export class Counter extends React.Component {
     // this.setState({ counter: this.state.counter + 1 }, () => {
     //   console.log(this.state.counter);
     // });
-    this.setState((prevState) => ({ counter: prevState.counter + 1 }));
+    this.setState((prevState) => ({
+      counter: prevState.counter + prevState.step,
+    }));
   };
   decrement = () => {
-    this.setState((prevState) => ({ counter: prevState.counter - 1 }));
-    this.setState((prevState) => ({ counter: prevState.counter - 1 }));
-    this.setState((prevState) => ({ counter: prevState.counter - 1 }));
+    this.setState((prevState) => ({
+      counter: prevState.counter - prevState.step,
+    }));
   };
   reset = () => {
-    this.setState({ counter: 0 });
+    this.setState({ counter: 0, step: 1 });
+  };
+  handleChangeStep = (e) => {
+    // this.setState({ step: Number(e.target.value) });
+    this.setState({ step: +e.target.value });
   };
   render() {
     const { title } = this.props;
-    const { counter } = this.state;
+    const { counter, step } = this.state;
+
     return (
       <FlexContainer>
         <StyledCounter>
           <h4>{title}</h4>
           <h1>{counter}</h1>
+          <input type="text" value={step} onChange={this.handleChangeStep} />
           <Flex>
             <StyledButton onClick={this.decrement}> minus</StyledButton>
             <StyledButton onClick={this.reset}>reset</StyledButton>
