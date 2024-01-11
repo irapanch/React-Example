@@ -13,7 +13,10 @@ export class Counter extends React.Component {
     loading: false,
   };
   increment = () => {
-    this.setState({ counter: this.state.counter + 1 });
+    // setState з колбеком, котрий йде після виконання зміни
+    // this.setState({ counter: this.state.counter + 1 }, () => {
+    //   console.log(this.state.counter);
+    // });
   };
   decrement = () => {
     this.setState({ counter: this.state.counter - 1 });
@@ -22,11 +25,13 @@ export class Counter extends React.Component {
     this.setState({ counter: 0 });
   };
   render() {
+    const { title } = this.props;
+    const { counter } = this.state;
     return (
       <FlexContainer>
         <StyledCounter>
-          <h4>{this.props.title}</h4>
-          <h1>{this.state.counter}</h1>
+          <h4>{title}</h4>
+          <h1>{counter}</h1>
           <Flex>
             <StyledButton onClick={this.decrement}> minus</StyledButton>
             <StyledButton onClick={this.reset}>reset</StyledButton>
