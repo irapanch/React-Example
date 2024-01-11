@@ -18,8 +18,10 @@ export const StyledColor = styled.li`
   border-radius: 8px;
   cursor: pointer;
   transition: all 0.5s ease;
+  background-color: ${(props) => props.children};
+  opacity: 1;
   &:hover {
-    background-color: lightcyan;
+    opacity: 0.5;
   }
 `;
 export const StyledColorsList = styled.ul`
