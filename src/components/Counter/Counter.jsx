@@ -25,6 +25,7 @@ export class Counter extends React.Component {
     return (
       <FlexContainer>
         <StyledCounter>
+          <h4>{this.props.title}</h4>
           <h1>{this.state.counter}</h1>
           <Flex>
             <StyledButton onClick={this.decrement}> minus</StyledButton>
