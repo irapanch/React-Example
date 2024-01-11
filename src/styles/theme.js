@@ -2,11 +2,11 @@ export const theme = {
   colors: {
     main: "#e2e2e4",
     accent: "teal",
-    bgMain: "yellow",
+    bgMain: "white",
     fontColor: "black",
   },
   backgrounds: {
-    main: "white",
+    main: "lightgreen",
   },
   shadows: {
     default: "2px 1px 2px 1px gray",
