@@ -7,32 +7,32 @@ import {
 } from "./Counter.styled";
 
 export class Counter extends React.Component {
+  state = {
+    counter: 21,
+    step: 1,
+    loading: false,
+  };
   increment = () => {
-    console.log(122);
+    this.setState({ counter: this.state.counter + 1 });
+  };
+  decrement = () => {
+    this.setState({ counter: this.state.counter - 1 });
+  };
+  reset = () => {
+    this.setState({ counter: 0 });
   };
   render() {
     return (
       <FlexContainer>
         <StyledCounter>
-          <h1>{0}</h1>
+          <h1>{this.state.counter}</h1>
           <Flex>
-            <StyledButton>minus</StyledButton>
-            <StyledButton>reset</StyledButton>
+            <StyledButton onClick={this.decrement}> minus</StyledButton>
+            <StyledButton onClick={this.reset}>reset</StyledButton>
             <StyledButton onClick={this.increment}>plus</StyledButton>
           </Flex>
         </StyledCounter>
       </FlexContainer>
     );
   }
-  // const sayHi = (e) => {
-  //   console.log(e);
-  //   console.log("Hello");
-  // };
-  // const mouseMove = () => {
-  //   console.log("You entered and move above a button");
-  // };
-
-  // const grit = (name) => {
-  //   console.log("Hello " + name + "! How are you?");
-  // };
 }
