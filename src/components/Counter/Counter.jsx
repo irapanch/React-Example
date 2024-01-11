@@ -17,9 +17,12 @@ export class Counter extends React.Component {
     // this.setState({ counter: this.state.counter + 1 }, () => {
     //   console.log(this.state.counter);
     // });
+    this.setState((prevState) => ({ counter: prevState.counter + 1 }));
   };
   decrement = () => {
-    this.setState({ counter: this.state.counter - 1 });
+    this.setState((prevState) => ({ counter: prevState.counter - 1 }));
+    this.setState((prevState) => ({ counter: prevState.counter - 1 }));
+    this.setState((prevState) => ({ counter: prevState.counter - 1 }));
   };
   reset = () => {
     this.setState({ counter: 0 });
