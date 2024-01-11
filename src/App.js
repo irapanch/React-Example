@@ -8,7 +8,7 @@ const App = () => {
   return (
     <>
       <FlexContainer>
-        <Counter title="Best counter" />
+        <Counter />
       </FlexContainer>
     </>
   );

@@ -7,6 +7,9 @@ import {
 } from "./Counter.styled";
 
 export class Counter extends React.Component {
+  static defaultProps = {
+    title: "Default props for component",
+  };
   state = {
     counter: 21,
     step: 2,
