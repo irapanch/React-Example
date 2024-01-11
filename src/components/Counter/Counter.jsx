@@ -14,12 +14,16 @@ export const Counter = () => {
   const mouseMove = () => {
     console.log("You entered and move above a button");
   };
+
+  const grit = (name) => {
+    console.log("Hello " + name + "! How are you?");
+  };
   return (
     <FlexContainer>
       <StyledCounter>
         <h1>{0}</h1>
         <Flex>
-          <StyledButton>minus</StyledButton>
+          <StyledButton onClick={() => grit("Oleh")}>minus</StyledButton>
           <StyledButton onMouseMove={mouseMove}>reset</StyledButton>
           <StyledButton onClick={sayHi}>plus</StyledButton>
         </Flex>
