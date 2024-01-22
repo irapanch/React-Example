@@ -43,6 +43,11 @@ export class TodoList extends React.Component {
   handleClearTodo = () => {
     this.setState({ todos: [] });
   };
+  handleClearComplitedTodos = () => {
+    this.setState((prev) => ({
+      todos: prev.todos.filter((item) => !item.completed),
+    }));
+  };
   render() {
     const { todos, currentText } = this.state;
     return (
@@ -72,6 +77,9 @@ export class TodoList extends React.Component {
               </StyledButton>
             </StyledTodo>
           ))}
+          <StyledButton $border={4} onClick={this.handleClearComplitedTodos}>
+            Clear selected todos
+          </StyledButton>
           <StyledButton $border={4} onClick={this.handleClearTodo}>
             Clear all todos
           </StyledButton>
