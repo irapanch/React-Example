@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { Flex } from "../../styles/GlobalStyles";
 
 const skilsList = ["all", "react", "angular", "vue"];
-
-export const EmployeesFilter = () => {
+// filterStr={filterStr}
+//           setFilterStr={this.handleChangeFilter}
+export const EmployeesFilter = ({ filterStr, setFilter }) => {
   return (
     <Filters>
       <h2>Filters</h2>
@@ -12,8 +13,8 @@ export const EmployeesFilter = () => {
       <Flex $height="100px" $items="center">
         <input
           type="text"
-          //   value={filterStr}
-          //   onChange={(e) => setFilter(e.target.value)}
+          value={filterStr}
+          onChange={(e) => setFilter(e.target.value)}
         />
 
         <label htmlFor="isAvailable">
