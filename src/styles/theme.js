@@ -10,6 +10,8 @@ export const theme = {
   },
   shadows: {
     default: "2px 1px 2px 1px gray",
+    md: "1px 1px 13px 2px green;",
+
     xl: "4px 2px 3px 3px black",
   },
   media: {
@@ -31,6 +33,7 @@ export const darkTheme = {
   shadows: {
     default: "2px 1px 2px 1px gray",
     xl: "4px 2px 3px 3px black",
+    md: "4px 2px 3px 3px green",
   },
   media: {
     tablet: "568px",
