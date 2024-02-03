@@ -5,7 +5,16 @@ import { Flex } from "../../styles/GlobalStyles";
 const skilsList = ["all", "react", "angular", "vue"];
 // filterStr={filterStr}
 //           setFilterStr={this.handleChangeFilter}
-export const EmployeesFilter = ({ filterStr, setFilter }) => {
+export const EmployeesFilter = ({
+  filterStr,
+  setFilter,
+  isAvailable,
+  toggleIsAvailable,
+  activeSkill,
+  setActiveSkill,
+}) => {
+  // --------3  отримали стан isAvailable з Employee
+  // ========3 отримали  функцію перемикання toggleIsAvailable з Employee
   return (
     <Filters>
       <h2>Filters</h2>
@@ -19,8 +28,8 @@ export const EmployeesFilter = ({ filterStr, setFilter }) => {
 
         <label htmlFor="isAvailable">
           <input
-            // onChange={toggleIsAvailable}
-            // checked={isAvailable}
+            onChange={toggleIsAvailable} // ======== 4 використали функцію
+            checked={isAvailable} // ------4 використали стан
             type="checkbox"
             id="isAvailable"
           />
@@ -33,8 +42,8 @@ export const EmployeesFilter = ({ filterStr, setFilter }) => {
             <input
               name="radioButtonName"
               type="radio"
-              //   onChange={() => setActiveSkill(radioButtonName)}
-              //   checked={activeSkill === radioButtonName}
+              onChange={() => setActiveSkill(radioButtonName)}
+              checked={activeSkill === radioButtonName}
               value={radioButtonName}
             />
             <span> {radioButtonName}</span>

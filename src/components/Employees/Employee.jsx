@@ -9,6 +9,8 @@ export class Employee extends Component {
   state = {
     users: userData,
     filterStr: "",
+    isAvailable: false, // ----------1 створили стан
+    activeSkill: "all",
   };
 
   handleDeleteUser = (id) => {
@@ -22,12 +24,27 @@ export class Employee extends Component {
   handleChangeFilter = (filterStr) => {
     this.setState({ filterStr });
   };
+  handleChangeAvailable = () => {
+    this.setState((prev) => ({ isAvailable: !prev.isAvailable })); // ==== 1 cтворили функцію перемикання
+  };
+  handleChangeSkill = (activeSkill) => {
+    this.setState({ activeSkill });
+  };
   render() {
-    const { users, filterStr } = this.state;
-    const filteredData = getFilteredData(users, filterStr);
+    const { users, filterStr, isAvailable, activeSkill } = this.state; //------2 підготували стан для передачі
+    const filteredData = getFilteredData(
+      users,
+      filterStr,
+      isAvailable,
+      activeSkill
+    );
     return (
       <Wrapper>
         <EmployeesFilter
+          activeSkill={activeSkill}
+          setActiveSkill={this.handleChangeSkill}
+          isAvailable={isAvailable} //-------2 передали стан
+          toggleIsAvailable={this.handleChangeAvailable} //======== 2 передали функцію
           filterStr={filterStr}
           setFilter={this.handleChangeFilter}
         />
