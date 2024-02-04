@@ -13,6 +13,20 @@ export class Employee extends Component {
     activeSkill: "all",
   };
 
+  componentDidMount() {
+    console.log("MOUNT");
+    const items = window.localStorage.getItem("USERS");
+    console.log(JSON.parse(items));
+    if (JSON.parse(items)?.length) {
+      this.setState({ users: JSON.parse(items) });
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.users !== this.state.users) {
+      window.localStorage.setItem("USERS", JSON.stringify(this.state.users));
+    }
+  }
+
   handleDeleteUser = (id) => {
     // const newUsers = this.state.users.filter((user) => user.id !== id);
     // this.setState({ users: newUsers });
