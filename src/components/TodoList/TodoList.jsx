@@ -9,6 +9,18 @@ export class TodoList extends React.Component {
     todos: todosData,
     currentText: "",
   };
+  componentDidMount() {
+    const items = JSON.parse(window.localStorage.getItem("Todos"));
+    if (items.length) {
+      this.setState({ todos: items });
+    }
+  }
+  componentDidUpdate(_, prevState) {
+    const { todos } = this.state;
+    if (prevState.todos.length !== todos.length) {
+      window.localStorage.setItem("Todos", JSON.stringify(todos));
+    }
+  }
 
   handleDelete = (id) => {
     // const newTodos = this.state.todos.filter((item) => item.id !== id);
