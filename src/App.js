@@ -6,14 +6,14 @@ import React from "react";
 
 // import LoginFormik from "./components/Login/LoginFormik";
 // import LoginHookForm from "./components/Login/LoginHookForm";
-import { Employee } from "./components/Employees/Employee";
+// import { Employee } from "./components/Employees/Employee";
 // import Login from "./components/Login/Login";
-// import { ColorPicker } from "./components/ColorPicker/ColorPicker";
+import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 // import { TodoList } from "./components/TodoList/TodoList";
 
 const App = () => {
   // return <StyledFlex $center></StyledFlex>;
-  return <Employee />;
+  return <ColorPicker />;
 };
 
 export default App;
