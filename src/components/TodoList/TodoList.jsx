@@ -9,11 +9,15 @@ export class TodoList extends React.Component {
     todos: todosData,
     currentText: "",
   };
+
+  inputRef = React.createRef(null); //шлях до компонента
+
   componentDidMount() {
     const items = JSON.parse(window.localStorage.getItem("Todos"));
     if (items.length) {
       this.setState({ todos: items });
     }
+    this.inputRef.current.focus(); // фокус на компонент
   }
   componentDidUpdate(_, prevState) {
     const { todos } = this.state;
@@ -67,6 +71,7 @@ export class TodoList extends React.Component {
         <StyledTodoList>
           <Flex $height="auto">
             <StyledInput
+              ref={this.inputRef} // передача  на імпут рефа для встановлення фокуса
               type="text"
               value={currentText}
               onChange={this.handleChangeInput}
