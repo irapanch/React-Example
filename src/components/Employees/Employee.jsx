@@ -4,7 +4,7 @@ import EmployeeList from "./EmployeeList";
 import { EmployeesFilter } from "./EmployeesFilter";
 import userData from "./../../assets/users.json";
 import { getFilteredData } from "../../helpers/getFilteredData";
-import { Modal } from "../Modal/Modal";
+import Modal from "../Modal/Modal";
 
 export class Employee extends Component {
   state = {
