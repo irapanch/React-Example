@@ -3,11 +3,13 @@ import { StyledInput, StyledTodo, StyledTodoList } from "./TodoList.styled";
 import todosData from "./../../assets/todos.json";
 import { Flex } from "../../styles/GlobalStyles";
 import React from "react";
+import Modal from "../Modal/Modal";
 
 export class TodoList extends React.Component {
   state = {
     todos: todosData,
     currentText: "",
+    isOpen: false,
   };
 
   inputRef = React.createRef(null); //шлях до компонента
@@ -64,10 +66,15 @@ export class TodoList extends React.Component {
       todos: prev.todos.filter((item) => !item.completed),
     }));
   };
+  toggleModal = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
+
   render() {
-    const { todos, currentText } = this.state;
+    const { todos, currentText, isOpen } = this.state;
     return (
       <>
+        {isOpen && <Modal close={this.toggleModal}>React Modal</Modal>}
         <StyledTodoList>
           <Flex $height="auto">
             <StyledInput
@@ -77,6 +84,7 @@ export class TodoList extends React.Component {
               onChange={this.handleChangeInput}
             />
             <StyledButton onClick={this.handleAdd}>Add</StyledButton>
+            <StyledButton onClick={this.toggleModal}>Open Modal</StyledButton>
           </Flex>
           {todos.map((item) => (
             <StyledTodo key={item.id}>

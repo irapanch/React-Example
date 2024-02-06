@@ -11,12 +11,14 @@ class Modal extends Component {
     }
   };
   componentDidMount() {
+    document.body.style.overflow = "hidden"; // засстосовуємо стиль для запобігання скролу
     this.timeoutId = setTimeout(() => {
       console.log(new Date().toLocaleTimeString());
     }, 1000);
     document.addEventListener("keydown", this.handleKeyDown);
   }
   componentWillUnmount() {
+    document.body.style.overflow = "auto"; // прибираємо hidden, щоб з'явилась можливість скролити
     document.removeEventListener("keydown", this.handleKeyDown);
     clearTimeout(this.timeoutId);
   }
