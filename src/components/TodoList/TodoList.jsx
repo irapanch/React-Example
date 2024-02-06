@@ -4,6 +4,19 @@ import todosData from "./../../assets/todos.json";
 import { Flex } from "../../styles/GlobalStyles";
 import React from "react";
 import Modal from "../Modal/Modal";
+import { motion } from "framer-motion";
+
+const textAnimateFromLeft = {
+  //   framer-motion
+  hidden: {
+    // opacity: 0,
+    x: "-100%",
+  },
+  isVisible: {
+    // opasity: 1,
+    x: 0,
+  },
+};
 
 export class TodoList extends React.Component {
   state = {
@@ -106,7 +119,12 @@ export class TodoList extends React.Component {
             <StyledButton onClick={this.toggleModal}>Open Modal</StyledButton>
           </Flex>
           {todos.map((item) => (
-            <StyledTodo key={item.id}>
+            <StyledTodo
+              initial="hidden"
+              whileInView="isVisible"
+              variants={textAnimateFromLeft}
+              key={item.id}
+            >
               <input
                 type="checkbox"
                 checked={item.completed}
