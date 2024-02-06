@@ -4,17 +4,27 @@ import todosData from "./../../assets/todos.json";
 import { Flex } from "../../styles/GlobalStyles";
 import React from "react";
 import Modal from "../Modal/Modal";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 const textAnimateFromLeft = {
   //   framer-motion
-  hidden: {
+  hidden: (custom) => ({
     // opacity: 0,
-    x: "-100%",
-  },
+    x: custom,
+  }),
   isVisible: {
     // opasity: 1,
     x: 0,
+    transition: {
+      duration: 0.1,
+    },
+  },
+  exit: {
+    x: "-500%",
+    opacity: 0,
+    transition: {
+      duration: 0.4,
+    },
   },
 };
 
@@ -118,27 +128,33 @@ export class TodoList extends React.Component {
             <StyledButton onClick={this.handleAdd}>Add</StyledButton>
             <StyledButton onClick={this.toggleModal}>Open Modal</StyledButton>
           </Flex>
-          {todos.map((item) => (
-            <StyledTodo
-              initial="hidden"
-              whileInView="isVisible"
-              variants={textAnimateFromLeft}
-              key={item.id}
-            >
-              <input
-                type="checkbox"
-                checked={item.completed}
-                onChange={() => this.handleToggleTodo(item.id)}
-              />
-              <span>{item.todo}</span>
-              <StyledButton
-                onClick={() => this.handleDelete(item.id)}
-                size="18px"
+          <AnimatePresence mode="sync">
+            {todos.map((item, idx) => (
+              <StyledTodo
+                initial="hidden"
+                whileInView="isVisible"
+                custom={idx % 2 === 0 ? "-100%" : "100%"}
+                variants={textAnimateFromLeft}
+                whileHover={{ rotate: 3 }}
+                exit="exit"
+                viewport={{ once: true }}
+                key={item.id}
               >
-                Delete
-              </StyledButton>
-            </StyledTodo>
-          ))}
+                <input
+                  type="checkbox"
+                  checked={item.completed}
+                  onChange={() => this.handleToggleTodo(item.id)}
+                />
+                <span>{item.todo}</span>
+                <StyledButton
+                  onClick={() => this.handleDelete(item.id)}
+                  size="18px"
+                >
+                  Delete
+                </StyledButton>
+              </StyledTodo>
+            ))}
+          </AnimatePresence>
           <StyledButton $border={4} onClick={this.handleClearComplitedTodos}>
             Clear selected todos
           </StyledButton>
