@@ -10,6 +10,7 @@ export class TodoList extends React.Component {
     todos: todosData,
     currentText: "",
     isOpen: false,
+    isOpenSecondModal: false,
   };
 
   inputRef = React.createRef(null); //шлях до компонента
@@ -69,12 +70,30 @@ export class TodoList extends React.Component {
   toggleModal = () => {
     this.setState({ isOpen: !this.state.isOpen });
   };
+  toggleModalSecond = () => {
+    this.setState({ isOpenSecondModal: !this.state.isOpenSecondModal });
+  };
 
   render() {
-    const { todos, currentText, isOpen } = this.state;
+    const { todos, currentText, isOpen, isOpenSecondModal } = this.state;
     return (
       <>
-        {isOpen && <Modal close={this.toggleModal}>React Modal</Modal>}
+        {isOpen && (
+          <Modal close={this.toggleModal}>
+            <button onClick={this.toggleModalSecond}>Open modal 2</button>
+            {isOpenSecondModal && (
+              <Modal close={this.toggleModalSecond}>
+                Modal Second{" "}
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                  Assumenda perspiciatis consequuntur modi voluptas, repellendus
+                  eum vero cupiditate commodi quia vitae, ipsum, architecto
+                  distinctio possimus omnis? Possimus odit magni minus eveniet.
+                </p>
+              </Modal>
+            )}
+          </Modal>
+        )}
         <StyledTodoList>
           <Flex $height="auto">
             <StyledInput
