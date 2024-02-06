@@ -4,6 +4,7 @@ import EmployeeList from "./EmployeeList";
 import { EmployeesFilter } from "./EmployeesFilter";
 import userData from "./../../assets/users.json";
 import { getFilteredData } from "../../helpers/getFilteredData";
+import Modal from "../Modal/Modal";
 
 export class Employee extends Component {
   state = {
@@ -11,7 +12,22 @@ export class Employee extends Component {
     filterStr: "",
     isAvailable: false, // ----------1 створили стан
     activeSkill: "all",
+    isOpenModal: false, // ++++++++ 1 створили стан
   };
+
+  componentDidMount() {
+    console.log("MOUNT");
+    const items = window.localStorage.getItem("USERS");
+    console.log(JSON.parse(items));
+    if (JSON.parse(items)?.length) {
+      this.setState({ users: JSON.parse(items) });
+    }
+  }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.users !== this.state.users) {
+      window.localStorage.setItem("USERS", JSON.stringify(this.state.users));
+    }
+  }
 
   handleDeleteUser = (id) => {
     // const newUsers = this.state.users.filter((user) => user.id !== id);
@@ -30,8 +46,19 @@ export class Employee extends Component {
   handleChangeSkill = (activeSkill) => {
     this.setState({ activeSkill });
   };
+
+  toggleModal = () => {
+    //+++++++++++ 2 cтворили функцію відкриття/закриття модалки
+    this.setState((prev) => ({ isOpenModal: !prev.isOpenModal }));
+  };
   render() {
-    const { users, filterStr, isAvailable, activeSkill } = this.state; //------2 підготували стан для передачі
+    const {
+      users,
+      filterStr,
+      isAvailable,
+      activeSkill,
+      isOpenModal, // +++++ 6 передаємо стан , чи включена модалка
+    } = this.state; //------2 підготували стан для передачі
     const filteredData = getFilteredData(
       users,
       filterStr,
@@ -47,11 +74,18 @@ export class Employee extends Component {
           toggleIsAvailable={this.handleChangeAvailable} //======== 2 передали функцію
           filterStr={filterStr}
           setFilter={this.handleChangeFilter}
+          toggleModal={this.toggleModal} //++++++++ 3 передали функцію відкриття/закритття модалки
         />
         <EmployeeList
           users={filteredData}
           onDeleteUser={this.handleDeleteUser}
         />
+        {isOpenModal && ( // +++++ 7 відмальовка модалки за умовою. Відмалювати, якщо стан isOpenModal true
+          <Modal close={this.toggleModal}>
+            {/* +++++++ 8 передаємо пропс на ЗАКРИТТЯ модалки */}
+            <h1>Обери товар</h1>
+          </Modal>
+        )}
       </Wrapper>
     );
   }

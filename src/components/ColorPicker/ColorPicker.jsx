@@ -6,11 +6,20 @@ import {
 } from "./ColorPicker.styled";
 import React from "react";
 import colorsData from "../../assets/colors.json";
-export class ColorPicker extends React.Component {
+
+export class ColorPicker extends React.PureComponent {
   state = {
     colors: colorsData,
     currentColor: "white",
   };
+  componentDidUpdate(prevProps, prevState) {
+    console.log(this.state.currentColor);
+  }
+
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return nextState.currentColor !== this.state.currentColor; // функція запобігає ререндеру компонента при натисканні на ту саму кнопку кілька разів
+  // }
+
   handleChangeColor = (color) => {
     this.setState({ currentColor: color });
   };

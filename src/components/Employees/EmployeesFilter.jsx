@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Flex } from "../../styles/GlobalStyles";
+import { StyledButton } from "../Counter/Counter.styled";
 
 const skilsList = ["all", "react", "angular", "vue"];
 // filterStr={filterStr}
@@ -12,13 +13,16 @@ export const EmployeesFilter = ({
   toggleIsAvailable,
   activeSkill,
   setActiveSkill,
+  toggleModal,
 }) => {
   // --------3  отримали стан isAvailable з Employee
   // ========3 отримали  функцію перемикання toggleIsAvailable з Employee
+  // ++++++++ 4 прийняли функцію відкр/закр модалки toggleModal
   return (
     <Filters>
       <h2>Filters</h2>
-
+      <StyledButton onClick={toggleModal}>Open modal</StyledButton>
+      {/* +++++ 5  застосовуємо метод ВІДКРИТТЯ модалки toggleModal */}
       <Flex $height="100px" $items="center">
         <input
           type="text"

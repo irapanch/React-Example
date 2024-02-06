@@ -33,11 +33,12 @@ export const StyledCounter = styled.div`
   min-height: 50vh;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
   justify-content: center;
-  width: 40vw;
+  /* width: 40vw; */
   border-radius: 12px;
+  padding: 15px;
   h1 {
     font-size: 100px;
     color: white;
