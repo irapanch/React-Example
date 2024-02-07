@@ -35,6 +35,7 @@ export class TodoList extends React.Component {
     currentText: "",
     isOpen: false,
     isOpenSecondModal: false,
+    limit: 3,
   };
 
   inputRef = React.createRef(null); //шлях до компонента
@@ -45,24 +46,45 @@ export class TodoList extends React.Component {
     //   .then((res) => this.setState({ todos: res.data.todos }));
 
     try {
-      const { data } = await axios.get("https://dummyjson.com/todos"); // деструктуризація з res
-      console.log(data);
+      const { data } = await axios.get("https://dummyjson.com/todos", {
+        // деструктуризація з res
+        params: {
+          limit: this.state.limit,
+        },
+      });
+      this.setState({ todos: data.todos });
     } catch (error) {
       alert(error.message);
     }
 
-    const items = JSON.parse(window.localStorage.getItem("Todos"));
-    if (items.length) {
-      this.setState({ todos: items });
-    }
-    this.inputRef.current.focus(); // фокус на компонент
+    // const items = JSON.parse(window.localStorage.getItem("Todos"));
+    // if (items.length) {
+    //   this.setState({ todos: items });
+    // }
+    // this.inputRef.current.focus(); // фокус на компонент
   }
-  componentDidUpdate(_, prevState) {
-    const { todos } = this.state;
-    if (prevState.todos.length !== todos.length) {
-      window.localStorage.setItem("Todos", JSON.stringify(todos));
+  async componentDidUpdate(_, prevState) {
+    try {
+      const { data } = await axios.get("https://dummyjson.com/todos", {
+        // деструктуризація з res
+        params: {
+          limit: this.state.limit,
+        },
+      });
+      this.setState({ todos: data.todos });
+    } catch (error) {
+      alert(error.message);
     }
+
+    // const { todos } = this.state;
+    // if (prevState.todos.length !== todos.length) {
+    //   window.localStorage.setItem("Todos", JSON.stringify(todos));
+    // }
   }
+
+  handleChangeLimit = (limit) => {
+    this.setState({ limit });
+  };
 
   handleDelete = (id) => {
     // const newTodos = this.state.todos.filter((item) => item.id !== id);
@@ -140,6 +162,14 @@ export class TodoList extends React.Component {
             <StyledButton onClick={this.handleAdd}>Add</StyledButton>
             <StyledButton onClick={this.toggleModal}>Open Modal</StyledButton>
           </Flex>
+          <select
+            value={this.state.limit}
+            onChange={(e) => this.handleChangeLimit(e.target.value)}
+          >
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
           <AnimatePresence mode="sync">
             {todos.map((item, idx) => (
               <StyledTodo
