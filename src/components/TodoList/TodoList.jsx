@@ -4,7 +4,8 @@ import todosData from "./../../assets/todos.json";
 import { Flex } from "../../styles/GlobalStyles";
 import React from "react";
 import Modal from "../Modal/Modal";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const textAnimateFromLeft = {
   //   framer-motion
@@ -39,6 +40,10 @@ export class TodoList extends React.Component {
   inputRef = React.createRef(null); //шлях до компонента
 
   componentDidMount() {
+    axios
+      .get("https://dummyjson.com/todos")
+      .then((res) => this.setState({ todos: res.data.todos }));
+
     const items = JSON.parse(window.localStorage.getItem("Todos"));
     if (items.length) {
       this.setState({ todos: items });
