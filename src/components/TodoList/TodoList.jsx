@@ -39,10 +39,17 @@ export class TodoList extends React.Component {
 
   inputRef = React.createRef(null); //шлях до компонента
 
-  componentDidMount() {
-    axios
-      .get("https://dummyjson.com/todos")
-      .then((res) => this.setState({ todos: res.data.todos }));
+  async componentDidMount() {
+    // axios
+    //   .get("https://dummyjson.com/todos")
+    //   .then((res) => this.setState({ todos: res.data.todos }));
+
+    try {
+      const { data } = await axios.get("https://dummyjson.com/todos"); // деструктуризація з res
+      console.log(data);
+    } catch (error) {
+      alert(error.message);
+    }
 
     const items = JSON.parse(window.localStorage.getItem("Todos"));
     if (items.length) {
