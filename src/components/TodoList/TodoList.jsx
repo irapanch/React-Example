@@ -64,16 +64,19 @@ export class TodoList extends React.Component {
     // this.inputRef.current.focus(); // фокус на компонент
   }
   async componentDidUpdate(_, prevState) {
-    try {
-      const { data } = await axios.get("https://dummyjson.com/todos", {
-        // деструктуризація з res
-        params: {
-          limit: this.state.limit,
-        },
-      });
-      this.setState({ todos: data.todos });
-    } catch (error) {
-      alert(error.message);
+    const { limit } = this.state;
+    if (prevState.limit !== limit) {
+      try {
+        const { data } = await axios.get("https://dummyjson.com/todos", {
+          // деструктуризація з res
+          params: {
+            limit: this.state.limit,
+          },
+        });
+        this.setState({ todos: data.todos });
+      } catch (error) {
+        alert(error.message);
+      }
     }
 
     // const { todos } = this.state;
@@ -130,6 +133,11 @@ export class TodoList extends React.Component {
   toggleModalSecond = () => {
     this.setState({ isOpenSecondModal: !this.state.isOpenSecondModal });
   };
+  fetchRandom = () => {
+    axios
+      .get("https://dummyjson.com/todos/random")
+      .then((res) => this.setState({ todos: [res.data] }));
+  };
 
   render() {
     const { todos, currentText, isOpen, isOpenSecondModal } = this.state;
@@ -170,6 +178,7 @@ export class TodoList extends React.Component {
             <option value="5">5</option>
             <option value="10">10</option>
           </select>
+          <button onClick={this.fetchRandom}>Get random TODO</button>
           <AnimatePresence mode="sync">
             {todos.map((item, idx) => (
               <StyledTodo
