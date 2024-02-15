@@ -1,7 +1,15 @@
 import axios from "axios";
+
+// axios.defaults.baseURL = "https://dummyjson.com/"; // baseURL для всіх екземплярів axios, тому бажано його не використовувати, а використовувати instance
+
+const postInstance = axios.create({
+  baseURL: "https://dummyjson.com/",
+});
+
 export const fetchPosts = async (params) => {
   try {
-    const { data } = await axios.get("https://dummyjson.com/posts", {
+    const { data } = await postInstance.get("/posts", {
+      // всі пости йдуть не через axios.get, а через instance
       params: {
         ...params,
       },
