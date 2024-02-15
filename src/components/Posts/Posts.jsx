@@ -26,7 +26,10 @@ export default class Posts extends Component {
         <Header />
         <WrapperPosts>
           <PostList posts={posts} />
-          <Button>Load more</Button>
+          <Button onClick={() => alert("Hello")} className="big" $bg="teal">
+            Example
+          </Button>
+          <Button $bg="gray">Load more</Button>
         </WrapperPosts>
       </div>
     );

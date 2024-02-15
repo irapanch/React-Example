@@ -1,5 +1,15 @@
 import styled from "styled-components";
 
+export const WrapperPosts = styled.section`
+  display: grid;
+  max-width: 80%;
+  margin: 0 auto;
+  padding-bottom: 50px;
+  .big {
+    font-size: 2rem;
+  }
+`;
+
 export const Wrapper = styled.ol`
   display: grid;
   /* grid-template-columns: repeat(3, 1fr); // 3 колонки */
@@ -10,13 +20,6 @@ export const Wrapper = styled.ol`
   margin: 0 auto;
   gap: 15px;
   list-style: none;
-`;
-
-export const WrapperPosts = styled.section`
-  display: grid;
-  max-width: 80%;
-  margin: 0 auto;
-  padding-bottom: 50px;
 `;
 
 export const Card = styled.li`
