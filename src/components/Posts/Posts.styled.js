@@ -16,6 +16,7 @@ export const WrapperPosts = styled.section`
   display: grid;
   max-width: 80%;
   margin: 0 auto;
+  padding-bottom: 50px;
 `;
 
 export const Card = styled.li`
