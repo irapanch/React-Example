@@ -30,6 +30,7 @@ export default class Posts extends Component {
   async componentDidUpdate(prevProps, prevState) {
     const { skip } = this.state;
     if (prevState.skip !== skip) {
+      this.setState({ loading: true });
       try {
         const { posts, limit } = await fetchPosts({
           limit: this.state.limit,
@@ -38,6 +39,8 @@ export default class Posts extends Component {
         this.setState((prev) => ({ posts: [...prev.posts, ...posts], limit }));
       } catch (error) {
         alert(error.message);
+      } finally {
+        this.setState({ loading: false });
       }
     }
   }
@@ -50,13 +53,17 @@ export default class Posts extends Component {
       <div>
         <Header />
         <WrapperPosts>
-          {loading ? <h1>Loading...</h1> : <PostList posts={posts} />}
+          {loading && !posts.length ? (
+            <h1>Loading...</h1>
+          ) : (
+            <PostList posts={posts} />
+          )}
 
           <Button onClick={() => alert("Hello")} className="big" $bg="teal">
             Example
           </Button>
-          <Button onClick={this.handleLoadMore} $bg="gray">
-            Load more
+          <Button disabled={loading} onClick={this.handleLoadMore} $bg="gray">
+            {loading ? "Loading..." : "Load more"}
           </Button>
         </WrapperPosts>
       </div>
