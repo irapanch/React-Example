@@ -10,8 +10,11 @@ export default class Posts extends Component {
     posts: [],
     limit: 2,
     skip: 0,
+    loading: false,
+    error: null,
   };
   async componentDidMount() {
+    this.setState({ loading: true });
     try {
       const { posts, limit } = await fetchPosts({
         limit: this.state.limit,
@@ -20,6 +23,8 @@ export default class Posts extends Component {
       this.setState((prev) => ({ posts: [...prev.posts, ...posts], limit }));
     } catch (error) {
       alert(error.message);
+    } finally {
+      this.setState({ loading: false });
     }
   }
   async componentDidUpdate(prevProps, prevState) {
@@ -40,12 +45,13 @@ export default class Posts extends Component {
     this.setState((prev) => ({ skip: prev.skip + prev.limit }));
   };
   render() {
-    const { posts } = this.state;
+    const { posts, loading } = this.state;
     return (
       <div>
         <Header />
         <WrapperPosts>
-          <PostList posts={posts} />
+          {loading ? <h1>Loading...</h1> : <PostList posts={posts} />}
+
           <Button onClick={() => alert("Hello")} className="big" $bg="teal">
             Example
           </Button>
