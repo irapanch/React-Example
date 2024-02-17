@@ -4,6 +4,7 @@ import { PostList } from "./PostList";
 import { fetchPosts } from "../../services/postApi";
 import { WrapperPosts } from "./Posts.styled";
 import { Button } from "./Button";
+import { toast } from "react-toastify";
 
 export default class Posts extends Component {
   state = {
@@ -24,6 +25,7 @@ export default class Posts extends Component {
     } catch (error) {
       alert(error.message);
     } finally {
+      toast.success("You data is ready!");
       this.setState({ loading: false });
     }
   }
@@ -37,6 +39,7 @@ export default class Posts extends Component {
           skip: this.state.skip,
         }); // деструктуризація постів з data
         this.setState((prev) => ({ posts: [...prev.posts, ...posts], limit }));
+        toast.info(`You add to your posts ${this.state.limit} elems!`);
       } catch (error) {
         alert(error.message);
       } finally {
