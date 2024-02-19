@@ -19,3 +19,16 @@ export const fetchPosts = async (params) => {
     return error.message;
   }
 };
+
+export const fetchPostsByQuery = async (params) => {
+  try {
+    const { data } = await postInstance.get("/posts/search", {
+      params: {
+        ...params,
+      },
+    });
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};

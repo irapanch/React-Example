@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Header } from "./Header";
 import { PostList } from "./PostList";
-import { fetchPosts } from "../../services/postApi";
+import { fetchPosts, fetchPostsByQuery } from "../../services/postApi";
 import { WrapperPosts } from "./Posts.styled";
 import { Button } from "./Button";
 import { toast } from "react-toastify";
@@ -13,6 +13,7 @@ export default class Posts extends Component {
     skip: 0,
     loading: false,
     error: null,
+    query: "",
   };
   async componentDidMount() {
     this.setState({ loading: true });
@@ -30,15 +31,31 @@ export default class Posts extends Component {
     }
   }
   async componentDidUpdate(prevProps, prevState) {
-    const { skip } = this.state;
-    if (prevState.skip !== skip) {
+    const { skip, query } = this.state;
+    if (prevState.skip !== skip && !query) {
       this.setState({ loading: true });
       try {
-        const { posts, limit } = await fetchPosts({
+        const { posts } = await fetchPosts({
           limit: this.state.limit,
           skip: this.state.skip,
         }); // деструктуризація постів з data
-        this.setState((prev) => ({ posts: [...prev.posts, ...posts], limit }));
+        this.setState((prev) => ({ posts: [...prev.posts, ...posts] }));
+        toast.info(`You add to your posts ${this.state.limit} elems!`);
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        this.setState({ loading: false });
+      }
+    }
+    if (query && (prevState.query !== query || prevState.skip !== skip)) {
+      this.setState({ loading: true });
+      try {
+        const { posts } = await fetchPostsByQuery({
+          limit: this.state.limit,
+          skip: this.state.skip,
+          q: query,
+        });
+        this.setState((prev) => ({ posts: [...prev.posts, ...posts] }));
         toast.info(`You add to your posts ${this.state.limit} elems!`);
       } catch (error) {
         alert(error.message);
@@ -50,12 +67,16 @@ export default class Posts extends Component {
   handleLoadMore = () => {
     this.setState((prev) => ({ skip: prev.skip + prev.limit }));
   };
+  handleChangeQuery = (queryStr) => {
+    this.setState({ query: queryStr, posts: [] });
+  };
   render() {
-    const { posts, loading } = this.state;
+    const { posts, loading, query } = this.state;
     return (
       <div>
-        <Header />
+        <Header onChangeQuery={this.handleChangeQuery} />
         <WrapperPosts>
+          <h1>You query is: {query} </h1>
           {loading && !posts.length ? (
             <h1>Loading...</h1>
           ) : (
