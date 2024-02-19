@@ -4,7 +4,8 @@ import todosData from "./../../assets/todos.json";
 import { Flex } from "../../styles/GlobalStyles";
 import React from "react";
 import Modal from "../Modal/Modal";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+import axios from "axios";
 
 const textAnimateFromLeft = {
   //   framer-motion
@@ -34,23 +35,59 @@ export class TodoList extends React.Component {
     currentText: "",
     isOpen: false,
     isOpenSecondModal: false,
+    limit: 3,
   };
 
   inputRef = React.createRef(null); //шлях до компонента
 
-  componentDidMount() {
-    const items = JSON.parse(window.localStorage.getItem("Todos"));
-    if (items.length) {
-      this.setState({ todos: items });
+  async componentDidMount() {
+    // axios
+    //   .get("https://dummyjson.com/todos")
+    //   .then((res) => this.setState({ todos: res.data.todos }));
+
+    try {
+      const { data } = await axios.get("https://dummyjson.com/todos", {
+        // деструктуризація з res
+        params: {
+          limit: this.state.limit,
+        },
+      });
+      this.setState({ todos: data.todos });
+    } catch (error) {
+      alert(error.message);
     }
-    this.inputRef.current.focus(); // фокус на компонент
+
+    // const items = JSON.parse(window.localStorage.getItem("Todos"));
+    // if (items.length) {
+    //   this.setState({ todos: items });
+    // }
+    // this.inputRef.current.focus(); // фокус на компонент
   }
-  componentDidUpdate(_, prevState) {
-    const { todos } = this.state;
-    if (prevState.todos.length !== todos.length) {
-      window.localStorage.setItem("Todos", JSON.stringify(todos));
+  async componentDidUpdate(_, prevState) {
+    const { limit } = this.state;
+    if (prevState.limit !== limit) {
+      try {
+        const { data } = await axios.get("https://dummyjson.com/todos", {
+          // деструктуризація з res
+          params: {
+            limit: this.state.limit,
+          },
+        });
+        this.setState({ todos: data.todos });
+      } catch (error) {
+        alert(error.message);
+      }
     }
+
+    // const { todos } = this.state;
+    // if (prevState.todos.length !== todos.length) {
+    //   window.localStorage.setItem("Todos", JSON.stringify(todos));
+    // }
   }
+
+  handleChangeLimit = (limit) => {
+    this.setState({ limit });
+  };
 
   handleDelete = (id) => {
     // const newTodos = this.state.todos.filter((item) => item.id !== id);
@@ -96,6 +133,11 @@ export class TodoList extends React.Component {
   toggleModalSecond = () => {
     this.setState({ isOpenSecondModal: !this.state.isOpenSecondModal });
   };
+  fetchRandom = () => {
+    axios
+      .get("https://dummyjson.com/todos/random")
+      .then((res) => this.setState({ todos: [res.data] }));
+  };
 
   render() {
     const { todos, currentText, isOpen, isOpenSecondModal } = this.state;
@@ -128,6 +170,15 @@ export class TodoList extends React.Component {
             <StyledButton onClick={this.handleAdd}>Add</StyledButton>
             <StyledButton onClick={this.toggleModal}>Open Modal</StyledButton>
           </Flex>
+          <select
+            value={this.state.limit}
+            onChange={(e) => this.handleChangeLimit(e.target.value)}
+          >
+            <option value="3">3</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+          </select>
+          <button onClick={this.fetchRandom}>Get random TODO</button>
           <AnimatePresence mode="sync">
             {todos.map((item, idx) => (
               <StyledTodo
