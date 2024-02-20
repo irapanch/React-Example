@@ -1,9 +1,9 @@
 import React from "react";
-import Posts from "./components/Posts/Posts";
-// import { Counter } from "./components/Counter/Counter.jsx";
+// import Posts from "./components/Posts/Posts";
+import { Counter } from "./components/Counter/Counter.jsx";
 // import { FlexContainer } from "./components/Counter/Counter.styled";
 // import RegisterForm from "./components/RegisterForm/RegisterForm";
-// import { StyledFlex } from "./styledComponents/StyledFlex";
+import { StyledFlex } from "./styledComponents/StyledFlex";
 
 // import LoginFormik from "./components/Login/LoginFormik";
 // import LoginHookForm from "./components/Login/LoginHookForm";
@@ -13,8 +13,10 @@ import Posts from "./components/Posts/Posts";
 // import { TodoList } from "./components/TodoList/TodoList";
 
 const App = () => {
-  // return <StyledFlex $center></StyledFlex>;
-  return <Posts />;
+  return <StyledFlex $center>
+    <Counter/>
+  </StyledFlex>;
+  // return <Posts />;
 };
 
 export default App;
