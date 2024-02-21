@@ -6,7 +6,7 @@ export default class Btn extends Component {
   }
   componentDidUpdate(prevProps) {
     // prevProps отримує попередні пропси, що прокидуються в компонент
-    console.log(prevProps.counter);
+    // console.log(prevProps.counter);
   }
   componentWillUnmount() {
     console.log("Btn UNMOUNT");

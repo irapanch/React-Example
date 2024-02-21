@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Flex,
   FlexContainer,
@@ -13,7 +13,21 @@ export const Counter = () => {
   const [step, setStep] = useState(1)
   
   
-  
+  useEffect(()=>{
+    console.log('Hello counter');
+  }, [])
+
+  useEffect(()=>{
+    if( counter > 3) {
+      console.log('STOP');
+    }
+   
+  }, [counter])
+  useEffect(()=>{
+    console.log('Counter or step was changed');
+   
+  }, [counter, step])
+
   const increment = () => {
   setCounter(prev => prev + +step)
    
