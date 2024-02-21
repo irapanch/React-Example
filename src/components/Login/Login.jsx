@@ -1,18 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyledFlex } from "../../styledComponents/StyledFlex";
 import styled from "styled-components";
 import StyledLabel from "../../styledComponents/StyledLabel";
 import StyledButton from "../../styledComponents/StyledButton";
 
+
 const Login = () => {
+
+  const [name, setName] = useState('')
+  const [surname, setSurname] = useState('')
+  const [email, setEmail] = useState('')
   const onSubmit = (e) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const name = form.elements.name.value;
-    const surname = form.elements.surname.value;
-    const email = form.elements.email.value;
+   
     console.log({ name, surname, email });
-    form.reset();
+    setName('')
+    setSurname('')
+    setEmail('')
+
   };
 
   return (
@@ -21,15 +26,15 @@ const Login = () => {
         <h1>Login Form</h1>
         <StyledLabel>
           First Name
-          <input name="name" placeholder="Enter name..." />
+          <input onChange={({target})=> setName(target.value)} value={name} name="name" placeholder="Enter name..." />
         </StyledLabel>
         <StyledLabel>
           Last Name
-          <input name="surname" placeholder="Enter surname..." />
+          <input onChange={({target})=> setSurname(target.value)}value={surname} name="surname" placeholder="Enter surname..." />
         </StyledLabel>
         <StyledLabel>
           Email
-          <input name="email" placeholder="Enter email..." />
+          <input onChange={({target})=> setEmail(target.value)}value={email} name="email" placeholder="Enter email..." />
         </StyledLabel>
         <StyledButton>Submit</StyledButton>
       </StyledFlex>
