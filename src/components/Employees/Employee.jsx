@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { styled } from "styled-components";
 import EmployeeList from "./EmployeeList";
 import { EmployeesFilter } from "./EmployeesFilter";
@@ -15,7 +15,29 @@ export const Employee = () => {
   const [isAvailable, setIsAvailable] = useState(false)
   const [activeSkill, setActiveSkill] = useState('all')
   const [isOpenModal, setIsOpenModal] = useState(false)
+//   componentDidMount() {
+//     console.log("MOUNT");
+//     const items = window.localStorage.getItem("USERS");
+//     console.log(JSON.parse(items));
+//     if (JSON.parse(items)?.length) {
+//       this.setState({ users: JSON.parse(items) });
+//     }
+//   }
+//   componentDidUpdate(prevProps, prevState) {
+//     if (prevState.users !== this.state.users) {
+//       window.localStorage.setItem("USERS", JSON.stringify(this.state.users));
+//     }
+//   }
+useEffect(()=>{
+  const items = JSON.parse(window.localStorage.getItem("USERS"));
+  if (items?.length) {
+    setUsers(items);
+        }
+}, [])
 
+useEffect(()=>{
+  window.localStorage.setItem("USERS", JSON.stringify(users));
+}, [users])
 
 const handleDeleteUser = (id) => {
     setUsers(prev => prev.filter((user) => user.id !== id))
