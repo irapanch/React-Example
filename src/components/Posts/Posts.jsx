@@ -1,4 +1,4 @@
-import React, {  useEffect, useState } from "react";
+import React, {  useEffect,  useState } from "react";
 import { Header } from "./Header";
 import { PostList } from "./PostList";
 import { fetchPosts, fetchPostsByQuery } from "../../services/postApi";
@@ -14,6 +14,8 @@ const[skip, setSkip] = useState(0)
 const[loading, setLoading] = useState(false)
 // const[error, setError] = useState(null)
 const[query, setQuery] = useState('')
+
+
 
 useEffect(() => {
   const getPostsFn = async(fnType) => {
