@@ -1,6 +1,6 @@
 import React from "react";
 import {Posts} from "./components/Posts/Posts";
-// import { Counter } from "./components/Counter/Counter.jsx";
+import { Counter } from "./components/Counter/Counter.jsx";
 // import { FlexContainer } from "./components/Counter/Counter.styled";
 // import RegisterForm from "./components/RegisterForm/RegisterForm";
 // import { StyledFlex } from "./styledComponents/StyledFlex";
@@ -16,7 +16,8 @@ const App = () => {
   // return <StyledFlex $center>
   //   <Login/>
   // </StyledFlex>;
-  return < Posts />;
+  // return < Posts />;
+  return < Counter  />;
 
 };
 

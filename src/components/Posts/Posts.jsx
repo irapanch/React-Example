@@ -16,14 +16,22 @@ const[loading, setLoading] = useState(false)
 const[query, setQuery] = useState('')
 
 const firstRender = useRef(true)
+const countOfRenders = useRef(0) // для підрахунку рендерів на сторінці
 
 useEffect(()=>{
-  if (firstRender.current){
-    console.log('тут ми відмінили виконання ефекта при першому рендері');
-    firstRender.current = false
-    return
-  }
-  console.log('render');
+
+  countOfRenders.current +=1
+  console.log('кількість рендерів: ', countOfRenders.current);
+
+
+
+  // -------- cancel first render
+  // if (firstRender.current){
+  //   console.log('тут ми відмінили виконання ефекта при першому рендері');
+  //   firstRender.current = false
+  //   return
+  // }
+  // console.log('render');
 })
 
 

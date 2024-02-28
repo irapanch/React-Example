@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Flex,
   FlexContainer,
@@ -11,7 +11,17 @@ export const Counter = () => {
 
   const [counter, setCounter] = useState(0) // значення й функція для зміни цього значення (як в setState)
   const [step, setStep] = useState(1)
-  
+
+  // ------------------ для підрахунку рендерів на сторінці
+  const countOfRenders = useRef(0) // для підрахунку рендерів на сторінці
+
+useEffect(()=>{
+
+  countOfRenders.current +=1
+  console.log('кількість рендерів: ', countOfRenders.current);
+
+})
+// ----------------//
   
   useEffect(()=>{
     console.log('Hello counter');
