@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Flex,
   FlexContainer,
@@ -9,8 +9,29 @@ import Btn from "./Btn";
 
 export const Counter = () => {
 
+
+
   const [counter, setCounter] = useState(0) // значення й функція для зміни цього значення (як в setState)
   const [step, setStep] = useState(1)
+
+
+//------- потребує мемоізації useMemo(() {використовують при великих об'ємах даних на великих циклах, коли повертається результат, наприклад фільтація, пошук інклуд}
+// useMemo(() запам'ятовує результат виконання ф-ї
+  const sum = value => {
+    console.log('Calc SOME DATA');
+    for (let i = 1; i< 10000000000; i++){
+     
+    }
+    return value * 2
+  }
+// const result = sum(step)
+
+const result = useMemo(()=>{ //-- виконай функцію, а значення змінюй лише тоді, якщо зміниться [step]
+  return sum(step)
+}, [step])
+//---------//end memo==============
+
+
 
   // ------------------ для підрахунку рендерів на сторінці
   const countOfRenders = useRef(0) // для підрахунку рендерів на сторінці

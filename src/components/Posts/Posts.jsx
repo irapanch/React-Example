@@ -26,12 +26,12 @@ useEffect(()=>{
 
 
   // -------- cancel first render
-  // if (firstRender.current){
-  //   console.log('тут ми відмінили виконання ефекта при першому рендері');
-  //   firstRender.current = false
-  //   return
-  // }
-  // console.log('render');
+  if (firstRender.current){
+    console.log('тут ми відмінили виконання ефекта при першому рендері');
+    firstRender.current = false
+    return
+  }
+  console.log('render');
 })
 
 
