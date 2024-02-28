@@ -1,4 +1,4 @@
-import React, {  useEffect,  useState } from "react";
+import React, {  useEffect,  useRef,  useState } from "react";
 import { Header } from "./Header";
 import { PostList } from "./PostList";
 import { fetchPosts, fetchPostsByQuery } from "../../services/postApi";
@@ -15,6 +15,16 @@ const[loading, setLoading] = useState(false)
 // const[error, setError] = useState(null)
 const[query, setQuery] = useState('')
 
+const firstRender = useRef(true)
+
+useEffect(()=>{
+  if (firstRender.current){
+    console.log('тут ми відмінили виконання ефекта при першому рендері');
+    firstRender.current = false
+    return
+  }
+  console.log('render');
+})
 
 
 useEffect(() => {
