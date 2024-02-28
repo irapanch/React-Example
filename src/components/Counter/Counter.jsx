@@ -17,18 +17,18 @@ export const Counter = () => {
 
 //------- потребує мемоізації useMemo(() {використовують при великих об'ємах даних на великих циклах, коли повертається результат, наприклад фільтація, пошук інклуд}
 // useMemo(() запам'ятовує результат виконання ф-ї
-  const sum = value => {
-    console.log('Calc SOME DATA');
-    for (let i = 1; i< 10000000000; i++){
+  // const sum = value => {
+  //   console.log('Calc SOME DATA');
+  //   for (let i = 1; i< 10000000000; i++){
      
-    }
-    return value * 2
-  }
+  //   }
+  //   return value * 2
+  // }
 // const result = sum(step)
 
-const result = useMemo(()=>{ //-- виконай функцію, а значення змінюй лише тоді, якщо зміниться [step]
-  return sum(step)
-}, [step])
+// const result = useMemo(()=>{ //-- виконай функцію, а значення змінюй лише тоді, якщо зміниться [step]
+//   return sum(step)
+// }, [step])
 //---------//end memo==============
 
 
