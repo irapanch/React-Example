@@ -1,7 +1,8 @@
-import React from "react";
-// import {Posts} from "./components/Posts/Posts";
-import { Counter } from "./components/Counter/Counter.jsx";
-import Component1 from "./components/Component1.jsx";
+import React, { useContext } from "react";
+import {Posts} from "./components/Posts/Posts";
+import { MyContext } from "./context/ContextProvider";
+// import { Counter } from "./components/Counter/Counter.jsx";
+// import Component1 from "./components/Component1.jsx";
 // import { FlexContainer } from "./components/Counter/Counter.styled";
 // import RegisterForm from "./components/RegisterForm/RegisterForm";
 // import { StyledFlex } from "./styledComponents/StyledFlex";
@@ -14,21 +15,28 @@ import Component1 from "./components/Component1.jsx";
 // import { TodoList } from "./components/TodoList/TodoList";
 
 
-export const MyContext = React.createContext()
+
 
 const App = () => {
+  const {user} =  useContext(MyContext)
+
+  return (
+  <>
+  <h1>{user.name}</h1>
+  <h2>{user.email}</h2>
+  < Posts />;
+  </>
+  )
   // return <StyledFlex $center>
   //   <Login/>
   // </StyledFlex>;
 
-  // return < Posts />;
-
-  return (
-  <MyContext.Provider value={{auto: 'Reno'}}>
-  < Counter  />
-  <Component1 />
-  </MyContext.Provider>
-  )
+  // return (
+  // 
+  // < Counter  />
+  // <Component1 />
+  // 
+  // )
 
 };
 
