@@ -10,11 +10,16 @@ import { theme } from "./styles/theme";
 import "modern-normalize";
 import ContextProvider from "./context/ContextProvider";
 
+import ThemeProviderContext from "./context/ThemeProviderContext.jsx";
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={theme}>
     <ContextProvider>
-    <App />
+      <ThemeProviderContext>
+      <App />
+      </ThemeProviderContext>
+   
     </ContextProvider>
     <ToastContainer autoClose={1000} />
     <GlobalSyles />

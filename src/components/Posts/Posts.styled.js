@@ -26,4 +26,5 @@ export const Card = styled.li`
   border: 2px solid black;
   padding: 5px 12px;
   box-shadow: 1px 1px 1px 2px gray;
+  background-color: ${props => props.$bg === 'dark' ?'lime' : 'lightgrey'};
 `;
