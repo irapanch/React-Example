@@ -1,30 +1,34 @@
-import React, {  useEffect,  useRef,  useState } from "react";
+import React, {  useEffect,  useReducer,  useRef,   } from "react";
 import { Header } from "./Header";
 import { PostList } from "./PostList";
 import { fetchPosts, fetchPostsByQuery } from "../../services/postApi";
 import { WrapperPosts } from "./Posts.styled";
 import { Button } from "./Button";
 import { toast } from "react-toastify";
+import { initialState, postReduser } from "../../redusers/postReduser";
+
+import { changeQuery, nextPage, setLimitValue, setLoading, setPosts } from "../../redusers/actions";
 
 
 export const Posts = () => {
-  const [posts, setPosts] = useState([])
-const[limitValue, setLimitValue] = useState(3)
-const[skip, setSkip] = useState(0)
-const[loading, setLoading] = useState(false)
-// const[error, setError] = useState(null)
-const[query, setQuery] = useState('')
 
+
+
+
+const [state, dispatch] = useReducer(postReduser,initialState)
+
+const{posts, limitValue, skip, loading, error, query} = state
+
+
+
+
+//+++ ------------------------------------------------
 const firstRender = useRef(true)
 const countOfRenders = useRef(0) // для підрахунку рендерів на сторінці
-
 useEffect(()=>{
 
   countOfRenders.current +=1
   console.log('кількість рендерів: ', countOfRenders.current);
-
-
-
   // -------- cancel first render
   if (firstRender.current){
     console.log('тут ми відмінили виконання ефекта при першому рендері');
@@ -33,26 +37,27 @@ useEffect(()=>{
   }
   console.log('render');
 })
-
+// +++ -------------------------------------------------
 
 useEffect(() => {
   const getPostsFn = async(fnType) => {
-    setLoading(true)
+   dispatch(setLoading(true))
     try {
       const { posts, limit } = await fnType({
         limit: limitValue,
         skip,
         q: query,
       }); 
-      
-      setPosts(prev => [...prev, ...posts])
-      setLimitValue(limit)
+      dispatch(setPosts(posts))
+      // setPosts(prev => [...prev, ...posts])
+      // setLimitValue(limit)
+      dispatch(setLimitValue(limit))
     } catch (error) {
       alert(error.message);
     } finally {
       toast.success("You data is ready!");
      
-      setLoading(false)
+      dispatch(setLoading(false))
     }
   }
 
@@ -66,12 +71,14 @@ useEffect(() => {
 
   const handleLoadMore = () => {
    
-    setSkip( prev => prev + limitValue )
+    // setSkip( prev => prev + limitValue )
+    dispatch(nextPage(posts))
   };
   const handleChangeQuery = (queryStr) => {
+    dispatch(changeQuery(queryStr))
    
-    setQuery(queryStr)
-    setPosts([])
+    // setQuery(queryStr)
+    // setPosts([])
   };
   return (
     <div>

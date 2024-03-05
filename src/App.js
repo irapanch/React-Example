@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-// import {Posts} from "./components/Posts/Posts";
+import {Posts} from "./components/Posts/Posts";
 // import { MyContext } from "./context/ContextProvider";
 // import Login from "./components/Login/Login";
 // import { Counter } from "./components/Counter/Counter.jsx";
@@ -14,7 +14,7 @@ import { ThemeContext } from "./context/ThemeProviderContext";
 // import { Employee } from "./components/Employees/Employee";
 
 // import { ColorPicker } from "./components/ColorPicker/ColorPicker";
-import { TodoList } from "./components/TodoList/TodoList";
+// import { TodoList } from "./components/TodoList/TodoList";
 
 
 
@@ -46,7 +46,7 @@ const App = () => {
 
     <div style={{background: theme === 'dark' ? 'lightgray' : 'white'}}>
       <button onClick={changeTheme}>SWITCH THEME</button>
-  <TodoList/>
+      < Posts />
   </div>
 
     
