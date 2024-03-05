@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useReducer, useRef } from "react";
+// import React, { useEffect, useMemo, useRef, useState } from "react";
 import {
   Flex,
   FlexContainer,
@@ -9,8 +10,64 @@ import Btn from "./Btn";
 
 export const Counter = () => {
 
-  const [counter, setCounter] = useState(0) // значення й функція для зміни цього значення (як в setState)
-  const [step, setStep] = useState(1)
+
+
+  // const [counter, setCounter] = useState(0) // значення й функція для зміни цього значення (як в setState)
+  // const [step, setStep] = useState(1)
+
+  const initialState = {
+    counter: 0,
+    step: 1,
+  }
+
+  const counterReduser = (state, action) => { // в action може бути (type, payload)
+    console.log(action);
+    switch (action.type){
+      case 'INCREMENT' :
+        return {
+          ...state,
+          counter: state.counter + state.step,
+        }
+        case 'DECREMENT' :
+        return {
+          ...state,
+          counter: state.counter - state.step,
+        }
+        case 'RESET' :
+        return {
+          ...state,
+          counter: 0,
+          step: 1,
+        }
+        case 'SET_STEP':
+          return {
+            ...state,
+            step: action.payload,
+          }
+      default:
+        return state
+    }
+      }
+
+      const [state, dispatch] = useReducer(counterReduser,initialState)
+
+//------- потребує мемоізації useMemo(() {використовують при великих об'ємах даних на великих циклах, коли повертається результат, наприклад фільтація, пошук інклуд}
+// useMemo(() запам'ятовує результат виконання ф-ї
+  // const sum = value => {
+  //   console.log('Calc SOME DATA');
+  //   for (let i = 1; i< 10000000000; i++){
+     
+  //   }
+  //   return value * 2
+  // }
+// const result = sum(step)
+
+// const result = useMemo(()=>{ //-- виконай функцію, а значення змінюй лише тоді, якщо зміниться [step]
+//   return sum(step)
+// }, [step])
+//---------//end memo==============
+
+
 
   // ------------------ для підрахунку рендерів на сторінці
   const countOfRenders = useRef(0) // для підрахунку рендерів на сторінці
@@ -23,36 +80,35 @@ useEffect(()=>{
 })
 // ----------------//
   
-  useEffect(()=>{
-    console.log('Hello counter');
-  }, [])
+  // useEffect(()=>{
+  //   console.log('Hello counter');
+  // }, [])
 
-  useEffect(()=>{
-    if( counter > 3) {
-      console.log('STOP');
-    }
+  // useEffect(()=>{
+  //   if( counter > 3) {
+  //     console.log('STOP');
+  //   }
    
-  }, [counter])
-  useEffect(()=>{
-    console.log('Counter or step was changed');
+  // }, [counter])
+  // useEffect(()=>{
+  //   console.log('Counter or step was changed');
    
-  }, [counter, step])
+  // }, [counter, step])
 
   const increment = () => {
-  setCounter(prev => prev + +step)
+ dispatch({type: 'INCREMENT'}) // - це action, те що ми відправляємо в об'єкт counterReduser (state, action)
    
   };
   const decrement = () => {
-    setCounter(prev => prev - step)
+    dispatch({type: 'DECREMENT'})
     
   };
   const reset = () => {
-    setCounter(0)
-    setStep(1)
+    dispatch({type: 'RESET'})
     
   };
   const handleChangeStep = (e) => {
-    setStep(e.target.value)
+    dispatch({type: 'SET_STEP', payload: +e.target.value})
     
 
     
@@ -61,13 +117,13 @@ useEffect(()=>{
     <FlexContainer>
     <StyledCounter>
      
-      <h1>{counter}</h1>
-      <input type="text" value={step} onChange={handleChangeStep} />
+      <h1>{state.counter}</h1>
+      <input type="text" value={state.step} onChange={handleChangeStep} />
       <Flex>
         <StyledButton onClick={decrement}> minus</StyledButton>
         <StyledButton onClick={reset}>reset</StyledButton>
         <StyledButton onClick={increment}>plus</StyledButton>
-        {counter > 3 && <Btn counter={counter} />}
+        {state.counter > 3 && <Btn counter={state.counter} />}
       </Flex>
     </StyledCounter>
   </FlexContainer>
