@@ -1,5 +1,10 @@
-import React, { useContext } from "react";
-import {Posts} from "./components/Posts/Posts";
+import React from "react";
+
+import { Navigate, Route, Routes } from "react-router-dom";
+import { Layout } from "./components/Layout";
+import HomePage from "./pages/HomePage";
+import About from "./pages/About";
+import PageNotFound from "./pages/PageNotFound";
 // import { MyContext } from "./context/ContextProvider";
 // import Login from "./components/Login/Login";
 // import { Counter } from "./components/Counter/Counter.jsx";
@@ -7,12 +12,12 @@ import {Posts} from "./components/Posts/Posts";
 // import { FlexContainer } from "./components/Counter/Counter.styled";
 // import RegisterForm from "./components/RegisterForm/RegisterForm";
 // import { StyledFlex } from "./styledComponents/StyledFlex";
-import { ThemeContext } from "./context/ThemeProviderContext";
+// import { ThemeContext } from "./context/ThemeProviderContext";
 
 // import LoginFormik from "./components/Login/LoginFormik";
 // import LoginHookForm from "./components/Login/LoginHookForm";
 // import { Employee } from "./components/Employees/Employee";
-
+// import {Posts} from "./components/Posts/Posts";
 // import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 // import { TodoList } from "./components/TodoList/TodoList";
 
@@ -20,36 +25,30 @@ import { ThemeContext } from "./context/ThemeProviderContext";
 
 
 const App = () => {
-  // const {user, isLoggedIn, logout} =  useContext(MyContext)
-  // if (!isLoggedIn){
-  //  return <StyledFlex $center>
-  //   <Login/>
-  // </StyledFlex>;
-  // }
-
-  const {theme, changeTheme} = useContext(ThemeContext)
-
-  // return (
-  // <div style={{background: theme === 'dark' ? 'lightgray' : 'white'}}>
-  // <h1>{user.name}</h1>
-  // <h2>{user.email}</h2>
-  // <button onClick={changeTheme}>SWITCH THEME</button>
-  // <button onClick={logout}>LOGOUT</button>
-  // < Posts />;
-  // </div>
-  // )
-  // return <StyledFlex $center>
-  //   <Login/>
-  // </StyledFlex>;
-
+ 
   return (
+<>
+{/* <nav>
+<Link to="/">HOME</Link>  */}
+{/* використання Link не перезавантажує сторінку, як звичайний тег <a href="/"></a> */}
+  {/* <Link to="/about">ABOUT</Link>
+</nav> */}
+<Routes>
+  <Route path="/" element={<Layout/>}>
+    {/* "/"  це абсолютний шлях */}
 
-    <div style={{background: theme === 'dark' ? 'lightgray' : 'white'}}>
-      <button onClick={changeTheme}>SWITCH THEME</button>
-      < Posts />
-  </div>
+  <Route  index element={<HomePage/>}/>
+  {/* path='/' заміняємо на index, щоб уникнути конфліктів з однаковим шляхом */}
 
-    
+<Route path='about' element={<About/>}/>
+{/* 'about' використовуємо без "/", тому що цей шлях відносний  <Route path="/" element={<Layout/>}> */}
+<Route path="test" element={<Navigate to='/'/>}/>
+{/*  <Navigate to='/'/> це одна з частин редиректу*/}
+  </Route>
+  <Route path="*" element={<PageNotFound/>}/>
+
+</Routes>
+</>
   
   )
 

@@ -17,7 +17,7 @@ export const Posts = () => {
 
 const [state, dispatch] = useReducer(postReduser,initialState)
 
-const{posts, limitValue, skip, loading, error, query} = state
+const{posts, limitValue, skip, loading, query} = state
 
 
 
