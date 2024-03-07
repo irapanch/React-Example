@@ -1,36 +1,40 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { useHttp } from '../hooks/useHttp';
+import { getUserById } from '../services/userApi';
 
 const SingleUser = () => {
     // const params = useParams()  ---- хук для витягування параметрів з SingleUser path="users/:id
     const {id} = useParams() // деструктуризація з params
     console.log(id);
 
+    const {data: user, loading, error} = useHttp(getUserById, id) // власний хук useHttp використовується для заміни шматка коду нижче ----- отримання user 
+
     // ------ отримання user 
-    const [user, setUser] = useState({})
-    const [loading, setLoading] =useState(false)
-    const [error, setError] = useState(null)
-    useEffect(()=>{
-        setLoading(true)
-        const getData = async ()=> {
-            try {
-                const { data } = await axios.get(`https://dummyjson.com/users/${id}`)
-                setUser(data)
-                setLoading(false)
-            } catch (error){
-                setError(error.message)
-                setLoading(false)
+    // const [user, setUser] = useState({})
+    // const [loading, setLoading] =useState(false)
+    // const [error, setError] = useState(null)
+    // useEffect(()=>{
+    //     setLoading(true)
+    //     const getData = async ()=> {
+    //         try {
+    //             const { data } = await axios.get(`https://dummyjson.com/users/${id}`)
+    //             setUser(data)
+    //             setLoading(false)
+    //         } catch (error){
+    //             setError(error.message)
+    //             setLoading(false)
     
-            } 
+    //         } 
     
-        }
-        getData() 
+    //     }
+    //     getData() 
         
 
 
 
-    }, [id])
+    // }, [id])
     //  ------------
   return (
     <div>
