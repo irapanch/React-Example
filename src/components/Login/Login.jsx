@@ -3,12 +3,12 @@ import { StyledFlex } from "../../styledComponents/StyledFlex";
 import styled from "styled-components";
 import StyledLabel from "../../styledComponents/StyledLabel";
 import StyledButton from "../../styledComponents/StyledButton";
-import { MyContext } from "../../context/ContextProvider";
+// import { MyContext } from "../../context/ContextProvider";
 
 
 const Login = () => {
 
-  const {login} = useContext(MyContext)
+  // const {login} = useContext(MyContext)
 
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
@@ -17,7 +17,7 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-   login({name, email})
+  //  login({name, email})
     console.log({ name, surname, email });
     setName('')
     setSurname('')

@@ -7,7 +7,7 @@ export const Navbar = () => {
   const navArray = [
     {
       src: '/',
-      title: 'HOMET',
+      title: 'HOME',
     },
     {
       src: '/about',
