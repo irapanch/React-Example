@@ -5,6 +5,8 @@ import { Layout } from "./components/Layout";
 import HomePage from "./pages/HomePage";
 import About from "./pages/About";
 import PageNotFound from "./pages/PageNotFound";
+import Users from "./pages/Users";
+import SingleUser from "./pages/SingleUser";
 // import { MyContext } from "./context/ContextProvider";
 // import Login from "./components/Login/Login";
 // import { Counter } from "./components/Counter/Counter.jsx";
@@ -42,6 +44,9 @@ const App = () => {
 
 <Route path='about' element={<About/>}/>
 {/* 'about' використовуємо без "/", тому що цей шлях відносний  <Route path="/" element={<Layout/>}> */}
+
+<Route path="users" element={<Users/>}/>
+<Route path="users/:id" element={<SingleUser/>}/>
 <Route path="test" element={<Navigate to='/'/>}/>
 {/*  <Navigate to='/'/> це одна з частин редиректу*/}
   </Route>

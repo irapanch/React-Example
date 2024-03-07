@@ -3,10 +3,35 @@ import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const Navbar = () => {
+  // ----Варіант автоматичного додавання Link через map масиву----
+  const navArray = [
+    {
+      src: '/',
+      title: 'HOMET',
+    },
+    {
+      src: '/about',
+      title: 'ABOUT',
+    },
+    {
+      src: '/users',
+      title: 'USERS',
+    },
+    {
+      src: '/posts',
+      title: 'POSTS',
+    },
+  ]
+
   return (
     <SideBar>
-      <StyledLink to='/'>HOME</StyledLink>
+      {
+navArray.map(({src, title})=><StyledLink key={src} to={src}>{title}</StyledLink>)
+      }
+      {/* --------- варіант ручного додавання  Link ----*/}
+      {/* <StyledLink to='/'>HOME</StyledLink>
       <StyledLink to='/about'>ABOUT</StyledLink>
+      <StyledLink to='/users'>USERS</StyledLink> */}
     </SideBar>
   )
 }
