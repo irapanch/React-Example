@@ -2,6 +2,7 @@
   "name": "react-example",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://irapanch.github.io/react-example",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@testing-library/jest-dom": "^5.17.0",
@@ -15,6 +16,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.50.0",
+    "react-router-dom": "^6.22.2",
     "react-scripts": "5.0.1",
     "react-toastify": "^10.0.4",
     "styled-components": "^6.1.8",
