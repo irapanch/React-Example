@@ -37,7 +37,7 @@ const Users = () => {
     {loading && <h2>Loading...</h2> }
     {error && <h2>Smth went wrong... Try again!</h2>}
     <StyledList >
-        {users.map(({id, firstName, lastName}) => (<li key={id}>
+        {users?.map(({id, firstName, lastName}) => (<li key={id}>
             <Link to={id.toString()}>{firstName} {lastName}</Link>
             
             </li>))}

@@ -46,7 +46,24 @@ const SingleUser = () => {
             <h3>Surname: {user.lastName}</h3>
             <h3>Email: {user.email}</h3>
             <h3>Age: {user.age}</h3>
+            <hr />
+            <h2>User info address:</h2>
+            {user.address &&   <h3> {user.address.city}</h3>}
+            {/* або використати: */}
+            {/* <h3> {user.address?.city}</h3> */}       
         </div>
+        {/* або використати перевірку: */}
+        {/* {user.length !== 0 && (<div>
+            <img src={user.image} alt={user.firstName}/>
+            <h3>Name: {user.firstName}</h3>
+            <h3>Surname: {user.lastName}</h3>
+            <h3>Email: {user.email}</h3>
+            <h3>Age: {user.age}</h3>
+            <hr />
+            <h2>User info address:</h2>                   
+            <h3> {user.address.city}</h3>
+            
+        </div>)} */}
     </div>
   )
 }
