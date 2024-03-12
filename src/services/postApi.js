@@ -32,3 +32,12 @@ export const fetchPostsByQuery = async (params) => {
     return error.message;
   }
 };
+
+export const getPostsByUserId = async (id) => {
+  try {
+    const { data } = await postInstance.get(`/posts/user/${id}`);
+    return data.posts;
+  } catch (error) {
+    return error.message;
+  }
+};

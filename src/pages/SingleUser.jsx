@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import { useHttp } from '../hooks/useHttp';
 import { getUserById } from '../services/userApi';
+import { StyledLink } from '../components/Navbar';
 
 const SingleUser = () => {
     // const params = useParams()  ---- хук для витягування параметрів з SingleUser path="users/:id
@@ -64,6 +65,14 @@ const SingleUser = () => {
             <h3> {user.address.city}</h3>
             
         </div>)} */}
+
+        {/* --------- вкладені маршрути--------- */}
+        <div>
+          <StyledLink to='address'>show address</StyledLink>
+          <StyledLink to='posts'>show posts</StyledLink>
+        </div>
+        {/* --- нижчеб в <Outlet/> відтворюється контент вкладених маршрутів---- */}
+        <Outlet/>
     </div>
   )
 }
