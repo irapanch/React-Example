@@ -48,8 +48,9 @@ const App = () => {
 
 <Route path="users" element={<Users/>}/>
 
-
+{/* --нижче використовуємо динамічний параметр /:id*/}
 <Route path="users/:id" element={<SingleUser/>}>
+  {/* --нижче використовуємо вкладені маршрути users/:id/address*/}
 <Route path="address" element={<h2>User address</h2>}/>
 <Route path="posts" element={<UserPosts/>}/>
 

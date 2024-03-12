@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Outlet, useParams } from 'react-router-dom'
+import { Outlet, useNavigate, useParams } from 'react-router-dom'
 import { useHttp } from '../hooks/useHttp';
 import { getUserById } from '../services/userApi';
 import { StyledLink } from '../components/Navbar';
@@ -11,6 +11,8 @@ const SingleUser = () => {
     console.log(id);
 
     const {data: user, loading, error} = useHttp(getUserById, id) // власний хук useHttp використовується для заміни шматка коду нижче ----- отримання user 
+
+    const navigate = useNavigate() // хук для переміщення вперед/назад по сторінкам
 
     // ------ отримання user 
     // const [user, setUser] = useState({})
@@ -39,6 +41,10 @@ const SingleUser = () => {
     //  ------------
   return (
     <div>
+      <button onClick={() => navigate(-1)}>Go back</button>
+      <button onClick={() => navigate('/')}>Go HOME</button>
+      <button onClick={() => navigate('/about')}>Go about</button>
+
         <h2>User - {user.firstName}</h2>
         <hr />
         <div>
