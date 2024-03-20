@@ -41,3 +41,21 @@ export const getPostsByUserId = async (id) => {
     return error.message;
   }
 };
+
+export const getPostsByQuery = async (query) => {
+  try {
+    const { data } = await postInstance.get(`/posts/search?q=${query}`);
+    return data.posts;
+  } catch (error) {
+    return error.message;
+  }
+};
+
+export const getPostsById = async (postId) => {
+  try {
+    const { data } = await postInstance.get(`/posts/${postId}`);
+    return data;
+  } catch (error) {
+    return error.message;
+  }
+};

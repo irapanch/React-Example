@@ -8,8 +8,8 @@ import PageNotFound from "./pages/PageNotFound";
 import Users from "./pages/Users";
 import SingleUser from "./pages/SingleUser";
 import UserPosts from "./components/UserPosts/UserPosts";
-import Posts from "./pages/PostsPage";
 import PostsPage from "./pages/PostsPage";
+import SinglePostPage from "./pages/SinglePostPage";
 // import { MyContext } from "./context/ContextProvider";
 // import Login from "./components/Login/Login";
 // import { Counter } from "./components/Counter/Counter.jsx";
@@ -48,8 +48,10 @@ const App = () => {
 <Route path='about' element={<About/>}/>
 {/* 'about' використовуємо без "/", тому що цей шлях відносний  <Route path="/" element={<Layout/>}> */}
 <Route path="posts" element={<PostsPage/>}/>
-<Route path="users" element={<Users/>}/>
+<Route path="posts/:postId" element={<SinglePostPage/>}/>
 
+
+<Route path="users" element={<Users/>}/>
 {/* --нижче використовуємо динамічний параметр /:id*/}
 <Route path="users/:id" element={<SingleUser/>}>
   {/* --нижче використовуємо вкладені маршрути users/:id/address*/}
