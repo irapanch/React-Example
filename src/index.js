@@ -11,13 +11,15 @@ import "modern-normalize";
 import { BrowserRouter } from "react-router-dom";
 // import ContextProvider from "./context/ContextProvider";
 
-// import ThemeProviderContext from "./context/ThemeProviderContext.jsx";
+import ThemeProviderContext from "./context/ThemeProviderContext.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={theme}>
     <BrowserRouter>
-    <App />
+    <ThemeProviderContext> <App />
+    </ThemeProviderContext>
+   
     </BrowserRouter>
 
     <GlobalSyles />
