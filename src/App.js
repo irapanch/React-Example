@@ -1,16 +1,16 @@
-import React from "react";
+import React, { lazy } from "react";
 
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Layout } from "./components/Layout";
 import HomePage from "./pages/HomePage";
-import About from "./pages/About";
+// import About from "./pages/About";
 import PageNotFound from "./pages/PageNotFound";
 import Users from "./pages/Users";
 import SingleUser from "./pages/SingleUser";
 import UserPosts from "./components/UserPosts/UserPosts";
 import PostsPage from "./pages/PostsPage";
 import SinglePostPage from "./pages/SinglePostPage";
-import Comments from "./components/Comments";
+// import Comments from "./components/Comments";
 // import useAuth from "./hooks/useAuth";
 import Login from "./components/Login/Login";
 import PrivateRoute from "./routes/PrivateRoute";
@@ -30,8 +30,10 @@ import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 // import {Posts} from "./components/Posts/Posts";
 // import { TodoList } from "./components/TodoList/TodoList";
 
-
-
+// Для код-сплітінга(розділення сторінок на окремі чанки) в lazy є сенс кидати тільки ті частини коду, в яких багато інформації на великих проєктах. Для розгрузки bundler й швидшого завантаження першої сторінки.
+// lazy працює у зв'язці з Suspense, що огортає Outlet
+const About = lazy(() => import('./pages/About'))
+const Comments = lazy(() => import('./components/Comments'))
 
 const App = () => {
 

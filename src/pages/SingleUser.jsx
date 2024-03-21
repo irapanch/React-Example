@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { Outlet, useNavigate, useParams } from 'react-router-dom'
 import { useHttp } from '../hooks/useHttp';
 import { getUserById } from '../services/userApi';
@@ -77,8 +77,11 @@ const SingleUser = () => {
           <StyledLink to='address'>show address</StyledLink>
           <StyledLink to='posts'>show posts</StyledLink>
         </div>
-        {/* --- нижчеб в <Outlet/> відтворюється контент вкладених маршрутів---- */}
-        <Outlet/>
+        <Suspense fallback={<h2>waiting...</h2>}>
+ {/* --- нижчеб в <Outlet/> відтворюється контент вкладених маршрутів---- */}
+ <Outlet/>
+        </Suspense>
+       
     </div>
   )
 }

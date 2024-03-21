@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import App from "./App";
-// import { ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { GlobalSyles } from "./styles/GlobalStyles";
 import { ThemeProvider } from "styled-components";
@@ -26,7 +26,7 @@ root.render(
     </ThemeProviderContext>
    
     </BrowserRouter>
-
+    <ToastContainer autoClose={1000} />
     <GlobalSyles />
   </ThemeProvider>
 //   <ThemeProvider theme={theme}>
