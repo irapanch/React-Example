@@ -11,8 +11,10 @@ import UserPosts from "./components/UserPosts/UserPosts";
 import PostsPage from "./pages/PostsPage";
 import SinglePostPage from "./pages/SinglePostPage";
 import Comments from "./components/Comments";
-import useAuth from "./hooks/useAuth";
+// import useAuth from "./hooks/useAuth";
 import Login from "./components/Login/Login";
+import PrivateRoute from "./routes/PrivateRoute";
+import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 // import { MyContext } from "./context/ContextProvider";
 // import Login from "./components/Login/Login";
 // import { Counter } from "./components/Counter/Counter.jsx";
@@ -26,30 +28,31 @@ import Login from "./components/Login/Login";
 // import LoginHookForm from "./components/Login/LoginHookForm";
 // import { Employee } from "./components/Employees/Employee";
 // import {Posts} from "./components/Posts/Posts";
-// import { ColorPicker } from "./components/ColorPicker/ColorPicker";
 // import { TodoList } from "./components/TodoList/TodoList";
 
 
 
 
 const App = () => {
-const {isLoggedIn} = useAuth()
-  return  isLoggedIn? (
+
+  return   (
 <>
 
 <Routes>
   <Route path="/" element={<Layout/>}>
      <Route  index element={<HomePage/>}/>
      <Route path='about' element={<About/>}/>
+     <Route path='/login' element={<Login/>}/>
      <Route path="posts" element={<PostsPage/>}/>
         <Route path="posts/:postId" element={<SinglePostPage/>}>
-          <Route path="comments" element={<Comments/>}/>
+          <Route path="comments" element={<PrivateRoute><Comments/></PrivateRoute>}/>
         </Route>        
      <Route path="users" element={<Users/>}/>
         <Route path="users/:id" element={<SingleUser/>}>  
           <Route path="address" element={<h2>User address</h2>}/>
           <Route path="posts" element={<UserPosts/>}/>
         </Route>
+        <Route path="colorPicker" element={<ColorPicker/>}/> 
     <Route path="test" element={<Navigate to='/'/>}/>
   </Route>
   
@@ -58,11 +61,7 @@ const {isLoggedIn} = useAuth()
 </Routes>
 </>
   
-  ) : (
-    <Routes>
-      <Route path="/" element={<Login/>}/>
-      <Route path="*" element={<Navigate to='/'/>}/>
-    </Routes>
+
   )
 
 

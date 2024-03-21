@@ -1,6 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
+import useAuth from '../hooks/useAuth'
 
 export const Navbar = () => {
   // ----Варіант автоматичного додавання Link через map масиву----
@@ -22,9 +23,11 @@ export const Navbar = () => {
       title: 'POSTS',
     },
   ]
-
+const {isLoggedIn, logout, user} =  useAuth()
+const navigate = useNavigate()
   return (
     <SideBar>
+      {user && <h2>Hello {user}</h2>}
       {
 navArray.map(({src, title})=><StyledLink key={src} to={src}>{title}</StyledLink>)
       }
@@ -32,6 +35,10 @@ navArray.map(({src, title})=><StyledLink key={src} to={src}>{title}</StyledLink>
       {/* <StyledLink to='/'>HOME</StyledLink>
       <StyledLink to='/about'>ABOUT</StyledLink>
       <StyledLink to='/users'>USERS</StyledLink> */}
+{isLoggedIn && <StyledLink to='/colorPicker'>Color Picker</StyledLink>}
+    {isLoggedIn ? 
+    <button onClick={logout}>Exit</button> :
+    <button onClick={()=> navigate('/login')}>Login</button>}
     </SideBar>
   )
 }
