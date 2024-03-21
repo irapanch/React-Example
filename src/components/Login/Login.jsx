@@ -3,22 +3,26 @@ import { StyledFlex } from "../../styledComponents/StyledFlex";
 import styled from "styled-components";
 import StyledLabel from "../../styledComponents/StyledLabel";
 import StyledButton from "../../styledComponents/StyledButton";
+import useAuth from "../../hooks/useAuth";
+import { useLocation, useNavigate } from "react-router-dom";
 // import { MyContext } from "../../context/ContextProvider";
 
 
 const Login = () => {
 
   // const {login} = useContext(MyContext)
-
+const {login } = useAuth()
   const [name, setName] = useState('')
   const [surname, setSurname] = useState('')
   const [email, setEmail] = useState('')
-
+  const location = useLocation()
+const navigate = useNavigate()
 
   const onSubmit = (e) => {
     e.preventDefault();
   //  login({name, email})
-    console.log({ name, surname, email });
+   login(name)
+   navigate(location.state?.from)
     setName('')
     setSurname('')
     setEmail('')
@@ -26,7 +30,8 @@ const Login = () => {
   };
 
   return (
-    <StyledForm onSubmit={onSubmit}>
+   <StyledFlex $center>
+     <StyledForm onSubmit={onSubmit}>
       <StyledFlex $gap="20px" $direction="column">
         <h1>Login Form</h1>
         <StyledLabel>
@@ -44,9 +49,12 @@ const Login = () => {
         <StyledButton>Submit</StyledButton>
       </StyledFlex>
     </StyledForm>
+   </StyledFlex>
   );
 };
 const StyledForm = styled.form`
+
+width: 50vw;
   background-color: white;
   padding: 10px 22px;
   box-shadow: ${({ theme }) => theme.shadows.md};
