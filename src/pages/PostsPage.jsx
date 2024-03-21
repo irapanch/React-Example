@@ -4,7 +4,7 @@ import { Posts } from '../components/Posts/Posts'
 import { useHttp } from '../hooks/useHttp'
 import { getPostsByQuery } from '../services/postApi'
 import { useForm } from 'react-hook-form'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useSearchParams } from 'react-router-dom'
 
 // const PostsPage = () => {
    
@@ -31,6 +31,7 @@ const PostsPage = () => {
   const {data} = useHttp(getPostsByQuery, query )
     
     console.log(query);
+    const location = useLocation()
   return (
     <>
     <form onSubmit={handleSubmit(submit)}>
@@ -40,7 +41,7 @@ const PostsPage = () => {
     <ol>
         {data?.map(post => (
             <li key={post.id}>
-              <Link to={post.id.toString()}><h2>{post.title}</h2></Link>
+              <Link state={{from: location}} to={post.id.toString()}><h2>{post.title}</h2></Link>
                
             </li>))}
     </ol>
