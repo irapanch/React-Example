@@ -12,12 +12,17 @@ import { BrowserRouter } from "react-router-dom";
 // import ContextProvider from "./context/ContextProvider";
 
 import ThemeProviderContext from "./context/ThemeProviderContext.jsx";
+import AuthProvider from "./context/AuthProvider.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={theme}>
     <BrowserRouter>
-    <ThemeProviderContext> <App />
+    <ThemeProviderContext>
+    <AuthProvider>
+    <App />
+    </AuthProvider>
+      
     </ThemeProviderContext>
    
     </BrowserRouter>

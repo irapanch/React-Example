@@ -11,6 +11,8 @@ import UserPosts from "./components/UserPosts/UserPosts";
 import PostsPage from "./pages/PostsPage";
 import SinglePostPage from "./pages/SinglePostPage";
 import Comments from "./components/Comments";
+import useAuth from "./hooks/useAuth";
+import Login from "./components/Login/Login";
 // import { MyContext } from "./context/ContextProvider";
 // import Login from "./components/Login/Login";
 // import { Counter } from "./components/Counter/Counter.jsx";
@@ -31,8 +33,8 @@ import Comments from "./components/Comments";
 
 
 const App = () => {
- 
-  return (
+const {isLoggedIn} = useAuth()
+  return  isLoggedIn? (
 <>
 
 <Routes>
@@ -56,7 +58,13 @@ const App = () => {
 </Routes>
 </>
   
+  ) : (
+    <Routes>
+      <Route path="/" element={<Login/>}/>
+      <Route path="*" element={<Navigate to='/'/>}/>
+    </Routes>
   )
+
 
 };
 
