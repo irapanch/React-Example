@@ -59,3 +59,12 @@ export const getPostsById = async (postId) => {
     return error.message;
   }
 };
+
+export const getPostComments = async (postId) => {
+  try {
+    const { data } = await postInstance.get(`/posts/${postId}/comments`);
+    return data.comments;
+  } catch (error) {
+    return error.message;
+  }
+};

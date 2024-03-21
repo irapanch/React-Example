@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { PostList } from '../components/Posts/PostList'
-import { useParams } from 'react-router-dom'
+import { Link, Outlet, useParams } from 'react-router-dom'
 import { useHttp } from '../hooks/useHttp'
 import { getPostsById } from '../services/postApi'
 
@@ -15,6 +15,9 @@ const SinglePostPage = () => {
     <hr/>
     <h2>{data?.title}</h2>
     <p>{data?.body}</p>
+    <hr />
+    <Link to={'comments'}>Show comments by post</Link>
+    <Outlet/>
     </>
    
 
