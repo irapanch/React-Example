@@ -17,7 +17,7 @@ import AuthProvider from "./context/AuthProvider.jsx";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <ThemeProvider theme={theme}>
-    <BrowserRouter>
+    <BrowserRouter basename="/react-example">
     <ThemeProviderContext>
     <AuthProvider>
     <App />
